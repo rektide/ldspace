@@ -1,7 +1,7 @@
 {
 	"name": "ldspace",
 	"version": "1.0.0",
-	"description": "Browser-first Web Component for a Linked Data Platform container",
+	"description": "Browser-first service & Web Component for a Linked Data Platform container",
 	"main": "ldspace.js",
 	"scripts": {
 		"build:fetch": "fetch2files",
