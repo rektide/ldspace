@@ -1,0 +1,25 @@
+{
+	"name": "ldspace",
+	"version": "1.0.0",
+	"description": "Browser-first Web Component for a Linked Data Platform container",
+	"main": "ldspace.js",
+	"scripts": {
+		"build:fetch": "fetch2files",
+		"build:jsonld": "ttl2jsonld",
+		"build:babel:node": "builder run build:babel:node",
+		"build": "npm run build:fetch && npm run ttl2jsonld && npm run build:babel:node",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://archive.voodoowarez.com/ldspace"
+	},
+	"keywords": [],
+	"author": "rektide de la faye",
+	"license": "X11",
+	"dependencies": {
+		"builder-rekon-babel": "^1.1.0",
+		"fetch2files": "^1.0.0",
+		"snabbdom": "^0.6.9"
+	}
+}
