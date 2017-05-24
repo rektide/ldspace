@@ -16,7 +16,11 @@ class BasicContainer{
 		this.path= opts.path|| "/"
 		this._headersDirectory= Object.clone({}, RequestHeaders, opts.headers, opts.headersDirectory)
 		this._headersFile= Object.clone({}, RequestHeaders, opts.headers, opts.headersFile)
+		this._type=[ "ldp:Resource", "ldp:Container", "ldp:BasicContainer"]
 		["handler"].forEach( slot=> this[slot]= this[slot].bind(this))
+	}
+	get ["@type"](){
+		return this._type
 	}
 
 	handler(evt){
@@ -49,15 +53,15 @@ class BasicContainer{
 		  files= await fs.readdir( evt.pathname),
 		  // prefix files with the full name
 		  basename= this.prefix+ evt.pathname
-		files.map(( f, i, arr)=> arr[ i]= basename+ f)
+		files.forEach(( f, i, arr)=> arr[ i]= basename+ f)
 		var
 		  json= JSON.stringify({
 			"@context": ContainerContext,
 			"@id": evt.request.url,
-			"@type": [ "ldp:Container", "ldp:BasicContainer"],
+			"@type": this._type
 			"contains": files
 		  }),
-		  response= new Response( JSON.stringify(json), this.headersDirectory)
+		  response= new Response( JSON.stringify( json), this.headersDirectory)
 		return response
 	}
 	async _readFile( evt){
