@@ -4,12 +4,13 @@
 	"description": "Browser-first service & Web Component for a Linked Data Platform container",
 	"main": "ldspace.js",
 	"scripts": {
-		"build": "npm run build:dir && npm run build:fetch && npm run build:ttl2jsonld && npm run build:babel:node",
+		"build": "npm run build:dir && npm run build:fetch && npm run build:ttl2jsonld && npm run build:json2es6m && builder run build:babel:node",
 		"build:dir": "[ -d build/ns ] || mkdir -p build/ns",
 		"build:fetch": "cd build/ns; fetch2files ../../ns/*url",
 		"build:ttl2jsonld": "npm run build:ttl2jsonld:ldp && npm run build:ttl2jsonld:pim",
-		"build:ttl2jsonld:ldp": "cd build/ns && ttl2jsonld ns-ldp.ttl -i $(cat ns-ldp.ttl.url) > ns-ldp.json",
-		"build:ttl2jsonld:pim": "cd build/ns && ttl2jsonld ns-pim-space.ttl -i $(cat ns-pim-space.ttl.url) > ns-pim-space.json",
+		"build:ttl2jsonld:ldp": "cd build/ns && ttl2jsonld ldp.ttl -i $(cat ../../ns/ldp.ttl.url) > ldp.json",
+		"build:ttl2jsonld:pim": "cd build/ns && ttl2jsonld pim-space.ttl -i $(cat ../../ns/pim-space.ttl.url) > pim-space.json",
+		"build:json2es6m": "cd ns && json2es6m ../build/ns/*.json",
 		"build:babel:node": "builder run build:babel:node",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
@@ -21,12 +22,13 @@
 	"author": "rektide de la faye",
 	"license": "X11",
 	"dependencies": {
-		"builder": "^3.2.2",
 		"snabbdom": "^0.6.9"
 	},
 	"devDependencies": {
+		"builder": "^3.2.2",
 		"builder-rekon-babel": "^1.1.0",
 		"fetch2files": "^1.0.0",
+		"json2es6m": "^1.0.0",
 		"ttl2jsonld": "^1.0.3"
 	}
 }

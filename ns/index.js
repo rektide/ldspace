@@ -1,5 +1,5 @@
-import ldp from "./ns-ldp"
-import pimSpace from "./ns-pim-space"
+import ldp from "./ldp"
+import pimSpace from "./pim-space"
 
 export default {
 	ldp,
