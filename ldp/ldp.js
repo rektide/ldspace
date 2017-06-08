@@ -14,57 +14,69 @@ class LinkedDataPlatform{
 		opts= opts|| {}
 		this.prefix= opts.prefix|| ""
 		this.path= opts.path|| "/"
-		this._directoryHeaders= Object.clone({}, RequestHeaders, opts.directoryHeaders)
+		this._headersDirectory= Object.clone({}, RequestHeaders, opts.headers, opts.headersDirectory)
+		this._headersFile= Object.clone({}, RequestHeaders, opts.headers, opts.headersFile)
 		["handler"].forEach( slot=> this[slot]= this[slot].bind(this))
 	}
 
 	handler(evt){
-		var
-		  requestUrl= new URL(event.request.url),
-		  pathname= requestUrl.pathname
+		evt.requestUrl= new URL(event.request.url)
+		var pathname= requestUrl.pathname
 		// only hnalde this if the prefix matches
 		if( !pathname.startsWith( this.prefix)){
 			return
 		}
 		// strip out the prefix from lookups
-		pathname= pathname.slice( this.prefix.length)
+		evt.pathname= pathname.slice( this.prefix.length)
 
 		// for now directories must end with /
-		var isDirectory= requestUrl.pathname.endsWith( "/")
+		var
+		  isDirectory= evt.requestUrl.pathname.endsWith( "/"),
+		  result
 		if( evt.method=== "GET"){
-			var response= isDirectory? this._readdir: this._readFile
-			if( isDirectory){
-				var
-				  files= fs.readdir( pathnae),
-				  response= this._convertReaddir( files, requestUrl.pathname)
-				evt.respondWith( response)
-			}else{
-				var
-				  file= fs.readFile( pathname)
-				  response= this._read
-			}
+			result= isDirectory? this._readDirectory( evt): this._readFile( evt)
+		}else if( evt.method=== "POST"){
+			result= isDirectory? this._makeDirectory( evt): this._makeFile( evt)
+		}
+		if( result){
+			evt.respondWith( result)
 		}
 	}
 
-	async _readdir( fspath, id){
-		var files= await fs.readdir( fspath)
-		files.map(( f, i, arr)=> arr[ i]= id+ f)
+	async _readDirectory( evt){
+		var
+		  // get files
+		  files= await fs.readdir( evt.pathname),
+		  // prefix files with the full name
+		  basename= this.prefix+ evt.pathname
+		files.map(( f, i, arr)=> arr[ i]= basename+ f)
 		var
 		  json= JSON.stringify({
 			"@context": ContainerContext,
-			"@id": id,
+			"@id": evt.request.url,
 			"@type": [ "ldp:Container", "ldp:BasicContainer"],
-			"contains": pathed
+			"contains": files
 		  }),
-		  response= new Response( JSON.stringify(json), this.directoryHeaders)
+		  response= new Response( JSON.stringify(json), this.headersDirectory)
 		return response
 	}
-	async _readFile( fspath, id){
-		var file= await fs.readFile( fspath)
+	async _readFile( evt){
+		var
+		  file= await fs.readFile( evt.pathname, "utf8"),
+		  response= new Response( file, this.headersFile)
+		return response
+	}
+	async _makeDirectory( evt){
+		
+	}
+	async _makeFile( evt){
 		
 	}
 
-	get directoryHeaders(){
-		return this._directoryHeaders
+	get headersDirectory(){
+		return this._headersDirectory
+	}
+	get headersFile(){
+		return this._headersFile
 	}
 }
