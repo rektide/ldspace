@@ -8,7 +8,7 @@ import { ContainerContext as default } from "./container-context"
 
 const utf8Encoder = new TextEncoder()
 
-class LinkedDataPlatform{
+class BasicContainer{
 
 	constructor( opts){
 		opts= opts|| {}
