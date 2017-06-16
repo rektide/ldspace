@@ -3,8 +3,8 @@ import Defer from "p-defer"
 import fs from "mz/fs"
 import pmap from "p-map"
 
-import RequestHeaders from "./headers"
-import { ContainerContext as default } from "./container-context"
+import { RequestHeaders } from "./headers"
+import { default as ContainerContext } from "./container-context"
 
 const utf8Encoder = new TextEncoder()
 
@@ -58,7 +58,7 @@ class BasicContainer{
 		  json= JSON.stringify({
 			"@context": ContainerContext,
 			"@id": evt.request.url,
-			"@type": this._type
+			"@type": this._type,
 			"contains": files
 		  }),
 		  response= new Response( JSON.stringify( json), this.headersDirectory)
