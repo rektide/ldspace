@@ -1,5 +1,5 @@
-import IndexedDB from "browserfs-esnext/src/backend/IndexedDB"
-import nodeFs from "browserfs/src/core/node_fs"
+import IndexedDB from "browserfs-esnext/ts/backend/IndexedDB"
+import nodeFs from "browserfs/ts/core/node_fs"
 import Defer from "p-defer"
 
 export function factory(){
