@@ -1,5 +1,5 @@
 import commonjs from "rollup-plugin-commonjs"
-import resolve from "rollup-plugin-node-resolve"
+import nodeResolve from "rollup-plugin-node-resolve-with-alias"
 
 var resolveConfig= {
 	// use "module" field for ES6 module if possible
@@ -38,18 +38,27 @@ var resolveConfig= {
 	// Any additional options that should be passed through
 	// to node-resolve
 	//customResolveOptions: {
-	//  moduleDirectory: 'js_modules'
+	//  moduleDirectory: "js_modules"
 	//}
+
+	alias: {
+		"path": "bfs-path",
+		"browserfs-esnext": "browserfs-esnext/build/temp/library/ts"
+	}
 }
 
-var commonjsConfig= {}
+var commonjsConfig= {
+	namedExports: {
+		"bfs-path/js/path.js": [ "dirname", "basename", "resolve", "sep", "join"]
+	}
+}
 
 export default {
 	entry: "sw/index.js",
 	dest: "build/sw/index.js",
 	format: "iife",
 	plugins: [
-		resolve(resolveConfig),
+		nodeResolve(resolveConfig),
 		commonjs(commonjsConfig)
 	],
 	sourceMap: true

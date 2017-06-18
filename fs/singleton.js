@@ -1,5 +1,5 @@
-import IndexedDB from "browserfs-esnext/ts/backend/IndexedDB"
-import nodeFs from "browserfs/ts/core/node_fs"
+import IndexedDB from "browserfs-esnext/backend/IndexedDB"
+import nodeFs from "browserfs-esnext/core/node_fs"
 import Defer from "p-defer"
 
 export function factory(){
@@ -19,9 +19,3 @@ export default function singleton(){
 	}
 	return _singleton
 }
-
-
-
-
-
-
