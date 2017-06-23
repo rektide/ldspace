@@ -42,8 +42,10 @@ var resolveConfig= {
 	//}
 
 	alias: {
-		"path": "bfs-path",
-		"browserfs-esnext": "browserfs-esnext/build/temp/library/ts"
+		"browserfs-esnext": "browserfs-esnext/build/temp/library/ts",
+		"buffer": "bfs-buffer",
+		"fs": "./fs/singleton",
+		"path": "bfs-path"
 	}
 }
 
