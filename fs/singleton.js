@@ -13,7 +13,7 @@ export function factory(){
 
 var _singleton
 
-export default function singleton(){
+export default function (){
 	if( !_singleton){
 		_singleton= factory()
 	}

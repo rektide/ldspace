@@ -1,4 +1,4 @@
-import browserFs from "../fs/singleton.js"
+import { factory, default as browserFs } from "../fs/singleton.js"
 import Defer from "p-defer"
 import fs from "mz/fs"
 import pmap from "p-map"
@@ -8,7 +8,7 @@ import { default as ContainerContext } from "./container-context"
 
 const utf8Encoder = new TextEncoder()
 
-class BasicContainer{
+export default class BasicContainer{
 
 	constructor( opts){
 		opts= opts|| {}

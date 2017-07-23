@@ -1,10 +1,16 @@
-var webpack = require("webpack");
+var webpack= require("webpack");
+var WebpackReflectPlugin= require("webpack-reflect").Plugin
 
 // browserfs
 
-module.exports = {
-	target: "webworker",
-	target: function(){},
+module.exports= {
+	output: {
+		path: __dirname + "/build/webpack",
+		pathinfo: true,
+		publicPath: "/build/webpack"
+	},
+	devtool: "source-map",
+	recordsPath: __dirname + "/build/webpack/records",
 	resolve: {
 		// Use our versions of Node modules.
 		alias: {
@@ -12,12 +18,12 @@ module.exports = {
 			"browserfs-esnext": "browserfs-esnext/build/temp/library/ts",
 			"stream": "stream-browserify",
 			"constants": "constants-browserify",
-			"fs": "browserfs/dist/shims/fs.js",
-			"buffer": "browserfs/dist/shims/buffer.js",
-			"path": "browserfs/dist/shims/path.js",
-			"processGlobal": "browserfs/dist/shims/process.js",
-			"bufferGlobal": "browserfs/dist/shims/bufferGlobal.js",
-			"bfsGlobal": require.resolve("browserfs")
+			"fs": "browserfs-esnext/build/temp/library/ts/core/node_fs.js",
+			"buffer": "bfs-buffer",
+			"path": "bfs-path",
+			"processGlobal": "bfs-process",
+			"bufferGlobal": "bfs-buffer",
+			"bfsGlobal": "browserfs-esnext/build/temp/library/ts/core/global.js"
 		}
 	},
 	plugins: [
@@ -28,7 +34,14 @@ module.exports = {
 			BrowserFS: "bfsGlobal",
 			process: "processGlobal",
 			Buffer: "bufferGlobal"
-		})
+		}),
+		//new webpack.optimize.CommonsChunkPlugin({
+		//	filename: "vendor.js",
+		//	names: ["vendor"]
+		//}),
+		//new webpack.NamedModulesPlugin(),
+		//new webpack.HashedModuleIdsPlugin(),
+		new WebpackReflectPlugin(),
 	],
 
 	//resolve: {
