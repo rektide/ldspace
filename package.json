@@ -27,6 +27,7 @@
 	"author": "rektide de la faye",
 	"license": "X11",
 	"dependencies": {
+		"any-promise-native": "^1.0.0",
 		"bfs-buffer": "^0.1.7",
 		"bfs-path": "^0.1.2",
 		"bfs-process": "^0.1.6",

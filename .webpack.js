@@ -10,7 +10,7 @@ module.exports= {
 		publicPath: "/build/webpack"
 	},
 	devtool: "source-map",
-	recordsPath: __dirname + "/build/webpack/records",
+	recordsPath: __dirname + "/build/webpack/records.json",
 	resolve: {
 		// Use our versions of Node modules.
 		alias: {
