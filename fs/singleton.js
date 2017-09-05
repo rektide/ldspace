@@ -1,14 +1,15 @@
-import IndexedDB from "browserfs-esnext/backend/IndexedDB"
-import nodeFs from "browserfs-esnext/core/node_fs"
+import { default as IndexedDB } from "browserfs-esnext/backend/IndexedDB"
+import { default as nodeFs } from "browserfs-esnext/core/node_fs"
 import Defer from "p-defer"
 
 export function factory(){
 	var
-	  defer= Defer()
-	  rootFs= new IndexedDB( defer.resolve, "ldspace")
-	nodeFs.initialize( rootFs)
-	rootFs.ready= defer.promise
-	return rootFs
+	  defer= Defer(),
+	  idb= new IndexedDB( defer.resolve, "ldspace"),
+	  rootFs= new nodeFs.FS()
+	rootFs.initialize( rootFs)
+	rootFs.__ready= defer.promise
+	return nodeFs
 }
 
 var _singleton

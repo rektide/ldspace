@@ -6,7 +6,11 @@
 <script type="text/javascript" src="vendor.js"></script>
 <script type="text/javascript" src="web.js"></script>
 <script type="text/javascript">
-var fs = reflectRequire("fs/singleton.js")
+var fs= reflectRequire("fs/singleton.js")
+var nodeFs= reflectRequire("node_modules/browserfs-esnext/build/temp/library/ts/core/node_fs.js").default
+var idb= reflectRequire("node_modules/browserfs-esnext/build/temp/library/ts/backend/IndexedDB.js").default
+var Defer= reflectRequire("node_modules/p-defer/index.js")
+var d= Defer()
 </script>
 <h1>Ldspace</h1>
 </body>
