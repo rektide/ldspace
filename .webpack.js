@@ -19,11 +19,13 @@ module.exports= {
 			"stream": "stream-browserify",
 			"constants": "constants-browserify",
 			"fs": "browserfs-esnext/build/temp/library/ts/core/node_fs.js",
-			"buffer": "bfs-buffer",
+			"buffer": "bufferGlobal",
 			"path": "bfs-path",
 			"processGlobal": "bfs-process",
-			"bufferGlobal": "bfs-buffer",
-			"bfsGlobal": "browserfs-esnext/build/temp/library/ts/core/global.js"
+			"bufferGlobal": __dirname + "/fill/bufferGlobal.js",
+			"bfsGlobal": "browserfs-esnext/build/temp/library/ts/core/global.js",
+			"bfs-buffer": "bufferGlobal",
+			"__buffer": __dirname + "/node_modules/buffer"
 		}
 	},
 	plugins: [
@@ -68,7 +70,8 @@ module.exports= {
 	// DISABLE Webpack"s built-in process and Buffer polyfills!
 	node: {
 		process: false,
-		Buffer: false
+		Buffer: false,
+		buffer: false
 	}
 };
 
