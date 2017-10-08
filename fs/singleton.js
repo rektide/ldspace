@@ -7,9 +7,9 @@ export function factory(){
 	  defer= Defer(),
 	  idb= new IndexedDB( defer.resolve, "ldspace"),
 	  rootFs= new nodeFs.FS()
-	rootFs.initialize( rootFs)
+	rootFs.initialize( idb)
 	rootFs.__ready= defer.promise
-	return nodeFs
+	return rootFs
 }
 
 var _singleton
