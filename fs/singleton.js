@@ -14,9 +14,13 @@ export function factory(){
 
 var _singleton
 
-export default function (){
+export default function(){
 	if( !_singleton){
 		_singleton= factory()
 	}
 	return _singleton
+}
+
+export function resetSingleton(){
+	_singleton= null
 }

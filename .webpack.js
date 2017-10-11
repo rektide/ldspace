@@ -18,14 +18,15 @@ module.exports= {
 			"browserfs-esnext": "browserfs-esnext/build/temp/library/ts",
 			"stream": "stream-browserify",
 			"constants": "constants-browserify",
-			"fs": "browserfs-esnext/build/temp/library/ts/core/node_fs.js",
+			"fs": __dirname + "/fill/fs.js",
 			"buffer": "bufferGlobal",
 			"path": "bfs-path",
 			"processGlobal": "bfs-process",
 			"bufferGlobal": __dirname + "/fill/bufferGlobal.js",
 			"bfsGlobal": "browserfs-esnext/build/temp/library/ts/core/global.js",
 			"bfs-buffer": "bufferGlobal",
-			"__buffer": __dirname + "/node_modules/buffer"
+			"__buffer": __dirname + "/node_modules/buffer",
+			"__fs": "browserfs-esnext/build/temp/library/ts/core/node_fs.js"
 		}
 	},
 	plugins: [

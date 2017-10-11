@@ -7,11 +7,13 @@
 <script type="text/javascript" src="web.js"></script>
 <script type="text/javascript">
 // setup pieces to emulate fs/singleton.js#default()
-var fs= reflectRequire("fs/singleton.js")
-var nodeFs= reflectRequire("node_modules/browserfs-esnext/build/temp/library/ts/core/node_fs.js").default
-var idb= reflectRequire("node_modules/browserfs-esnext/build/temp/library/ts/backend/IndexedDB.js").default
-var Defer= reflectRequire("node_modules/p-defer/index.js")
-var d= Defer()
+//var fs= reflectRequire("fs/singleton.js")
+var fs= reflectRequire("fill/fs.js")
+//var nodeFs= reflectRequire("node_modules/browserfs-esnext/build/temp/library/ts/core/node_fs.js").default
+//var idb= reflectRequire("node_modules/browserfs-esnext/build/temp/library/ts/backend/IndexedDB.js").default
+//var Defer= reflectRequire("node_modules/p-defer/index.js")
+//var d= Defer()
+// fs.default()
 </script>
 <h1>Ldspace</h1>
 </body>
