@@ -17,14 +17,14 @@ export default class BasicContainer{
 		this._headersDirectory= Object.clone({}, RequestHeaders, opts.headers, opts.headersDirectory)
 		this._headersFile= Object.clone({}, RequestHeaders, opts.headers, opts.headersFile)
 		this._type=[ "ldp:Resource", "ldp:Container", "ldp:BasicContainer"]
-		["handler"].forEach( slot=> this[slot]= this[slot].bind(this))
+		[ "handler"].forEach( slot=> this[ slot]= this[ slot].bind( this))
 	}
-	get ["@type"](){
+	get [ "@type"](){
 		return this._type
 	}
 
-	handler(evt){
-		evt.requestUrl= new URL(event.request.url)
+	handler( evt){
+		evt.requestUrl= new URL( event.request.url)
 		var pathname= requestUrl.pathname
 		// only hnalde this if the prefix matches
 		if( !pathname.startsWith( this.prefix)){
