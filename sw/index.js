@@ -1,4 +1,4 @@
-import * as BasicContainer from "../ldp/BasicContainer"
+import BasicContainer from "../ldp/BasicContainer"
 import "webpack-reflect/global"
 
 //import { factory, default as browserFs } from "../fs/singleton"
@@ -14,7 +14,7 @@ this.addEventListener( "fetch", async function( fetch){
 			var
 			  path= fetch.request.url.pathname,
 			  parentDir= dirname( path),
-			  parentStat= await stat( path),
+			  parentStat= await stat( path)
 			if( !parentStat.isDirectory()){
 				throw new Error("Expected a directory")
 			}
