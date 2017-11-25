@@ -14,7 +14,7 @@
 		"build:json2es6m": "cd ns && json2es6m ../build/ns/*.json",
 		"build:rollup": "rollup -c .rollup.sw.js",
 		"build:webpack:sw": "webpack --config .webpack.js --target webworker --output-filename sw.js sw",
-		"build:webpack:web": "webpack --config .webpack.js --target web --output-filename web.js sw",
+		"build:webpack:web": "webpack --config .webpack.js --target web --output-filename web.js sw/index.js",
 		"build:babel:node": "builder run build:babel:node",
 		"build:sw": "rollup -c .rollup.sw.js",
 		"test": "echo \"Error: no test specified\" && exit 1"

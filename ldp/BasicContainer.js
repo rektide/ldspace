@@ -1,5 +1,8 @@
 import ContainerContext from "./container-context"
 import { factory, default as browserFs } from "../fs/singleton.js"
+import memoizedMember from "memoized-member"
+import propertyAccumulator from "property-accumulator"
+import objectAssignAll from "object-assign-all"
 
 import fs from "mz/fs"
 import merge from "lodash.merge"
@@ -15,13 +18,18 @@ async function toArray( iter){
 }
 
 export default class BasicContainer{
+	static get defaults(){
+		return memoizedMember( this, "defaults", propertyAccumulator( this, "defaults", {
+			_id: {
+				value: ""
+			},
+			_type: {
+				value: [ "ldp:Resource", "ldp:Container", "ldp:BasicContainer"]
+			},
+		}))
+	}
 	constructor( opts){
-		var defaults= {
-			_id: "",
-			_type: [ "ldp:Resource", "ldp:Container", "ldp:BasicContainer"]
-			baseDir: process.cwd()
-		}
-		Object.assign( this, defaults, opts)
+		objectAssignAll( this, defaults, opts)
 		(this._bind|| []).forEach( slot=> this[ slot]= this[ slot].bind( this))
 	}
 	get [ "@type"](){
